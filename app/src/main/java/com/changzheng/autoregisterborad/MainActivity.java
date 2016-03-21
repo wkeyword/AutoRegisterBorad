@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.net.wifi.WifiManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         IntentFilter filter=new IntentFilter();
 //        订阅广播事件,wifi状态
         filter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
+        filter.addAction("com.changzhengsoft.app.EXIT");
         registerReceiver(myReceiver, filter);
     }
 
@@ -39,6 +41,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         unregisterReceiver(myReceiver);
         super.onDestroy();
+    }
+
+    public void sendMyBroder(View view) {
+        Intent intent=new Intent();
+        intent.setAction("com.changzhengsoft.app.EXIT");
+
     }
 
     //    私有类
@@ -83,6 +91,9 @@ public class MainActivity extends AppCompatActivity {
 
                 }
 
+            }else if (intent.getAction().equals("com.changzhengsoft.app.EXIT")){
+                Toast.makeText(context,"activity马上关闭咯!",Toast.LENGTH_SHORT).show();
+                finish();
             }
         }
     }
