@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     public void sendMyBroder(View view) {
         Intent intent=new Intent();
         intent.setAction("com.changzhengsoft.app.EXIT");
+        sendBroadcast(intent);
 
     }
 
@@ -88,11 +89,13 @@ public class MainActivity extends AppCompatActivity {
                     case WifiManager.WIFI_STATE_ENABLING:
                         Toast.makeText(context,"wifi正在打开",Toast.LENGTH_SHORT).show();
                         break;
+                    default:
+                        break;
 
                 }
 
             }else if (intent.getAction().equals("com.changzhengsoft.app.EXIT")){
-                Toast.makeText(context,"activity马上关闭咯!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"activity马上关闭咯!",Toast.LENGTH_SHORT).show();
                 finish();
             }
         }
